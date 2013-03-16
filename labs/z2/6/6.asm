@@ -1,5 +1,5 @@
 ;================================================================= 
-title	Програма 5 (типа COM)		;имя текстового файла  -  z2_pr5.asm
+title	Програма 6 (типа COM)		;имя текстового файла  -  z2_pr6.asm
 ;------------------------------------------------------------------------------------------------------------
 text		segment	'code'										;начало сегмента, содержащего текст     					          		
 																;программы – сегмент кода с именем text
@@ -13,7 +13,13 @@ assume	     CS:text, DS:text, ES:text, SS:text 				;регистры  CS, DS, ES, SS
 stdout		equ		1 
 lf			equ		10											;код ASCII перевода строки  
 cr			equ		13											;код ASCII возврата каретки
-stg			equ		40h											;код ASCII *
+TLC			equ		00DAh										;код ASCII левый верхний угол
+TRC			equ		00BFh										;код ASCII правый верхний угол
+LLC			equ		00C0h										;код ASCII левый нижний угол
+LRC			equ		00D9h										;код ASCII правый нижний угол
+VL			equ		00B3h										;код ASCII вертикальная черта
+HL			equ		00C4h										;код ASCII горизонтальная черта
+DOT			equ		002Eh										;код ASCII точка
 ;------------------------------------------------------------------------------------------------------------
 myproc	proc													;начало процедуры по имени myproc
 																;Вывод на экран строки текста  " Работаешь на ПК – изучи ассемблер "
@@ -33,7 +39,7 @@ outprog:	mov		AH,4Ch										;номер функции завершения в AH
 myproc		endp												;конец тела процедуры
 ;------------------------------------------------------------------------------------------------------------
 																;Поля данных
-mes		db		stg,cr,lf, stg,stg,cr,lf, stg,stg,stg,cr,lf, stg,stg,stg,stg,cr,lf, stg,stg,stg,stg,stg,cr,lf, stg,stg,stg,stg,stg,stg,cr,lf, stg,stg,stg,stg,stg,stg,stg,cr,lf, stg,stg,stg,stg,stg,stg,stg,stg,cr,lf
+mes		db		TLC, HL, HL, HL, HL, HL, HL, HL, TRC,	lf, cr,		VL, DOT, DOT, DOT, DOT, DOT, DOT, DOT, VL,		lf, cr,		VL, DOT, DOT, DOT, DOT, DOT, DOT, DOT, VL,		lf, cr,		VL, DOT, DOT, DOT, DOT, DOT, DOT, DOT, VL,		lf, cr,		LLC, HL, HL, HL, HL, HL, HL, HL, LRC
 meslen		equ		$-mes		       							;в meslen длина выводимого сообщения
 ;------------------------------------------------------------------------------------------------------------
 text		ends												;конец сегмента кода 
